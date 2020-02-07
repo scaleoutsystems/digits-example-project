@@ -1,4 +1,3 @@
-[This file should be rewritten to focus on descibing the data format and what members need to do to hook up their own loca data sources]
 
 # A federated model alliance for classification of hand-written digits, using a simple Convolutional Neural Network (CNN)
 
