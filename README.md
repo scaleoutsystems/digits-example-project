@@ -6,7 +6,7 @@ The objective of this alliance model is to illustrates how to set up an alliance
 ## 1. Instructions for alliance members
 The members of an alliance generate incremental updates to the global model upon request, by training the model on locally available data. They will also act as validators, by scoring the federated model of local training data to compute average/max/min training errors. 
 
-## 1.1 Integrating your local data sources (members)
+### 1.1 Integrating your local data sources (members)
 
 This example assumes that the member container can read training examples from a file called "train.csv", stored on a Docker  volume. When starting the member services, you will be asked to provide the ID of this volume. 
 
@@ -37,5 +37,5 @@ Download the Docker-compose file "member.yaml", then:
      $ docker-compose up -f member.yaml 
      
     
-## 3. Start construction of the model (Alliance admin)  
-TODO
+# 3. Instuctions for Alliance Admins 
+TODO [Should maybe be elsewhere?]
