@@ -3,74 +3,10 @@ version: '3.7'
 services:
   member:
     image: "scaleout/member:latest"
-    build: member/.
     environment:
       - GET_HOSTS_FROM=dns
     command: sh ./run.sh
     volumes:
       - ./member:/app
       - ./member/data:/app/data
-    depends_on:
-      - minio
-      - controller
 
-  member2:
-    image: "scaleout/member2:latest"
-    build: member2/.
-    environment:
-      - GET_HOSTS_FROM=dns
-    command: sh ./run.sh
-    volumes:
-      - ./member2:/app
-      - ./member2/data:/app/data
-    depends_on:
-      - minio
-      - controller
-
-  controller:
-    image: "scaleout/controller:latest"
-    build: controller/.
-    environment:
-    - GET_HOSTS_FROM=dns
-    command: python server.py
-    ports:
-      - 12080:12080
-
-  orchestrator:
-    image: "scaleout/orchestrator:latest"
-    build: orchestrator/.
-    environment:
-    - GET_HOSTS_FROM=dns
-    # --- Alternative 1 ---
-    #command: sh ./run.sh          # UNCOMMENT THIS IF YOU WANT IT SELFCONTAINED
-    # --- Alternative 2 ---
-    command: tail -f /dev/null     # UNCOMMENT THIS IF YOU WANT TO attach and start orchestrator interactively!
-    volumes:
-      - ./orchestrator/:/app/  # IMPORTANT FOR HAVING A LINK TO YOUR LOCAL FILES IF YOU INTEND TO RUN INTERACTIVELY!
-      - ./orchestrator/data:/app/data
-    depends_on:
-      - minio
-      - controller
-
-  minio:
-    image: minio/minio:latest
-    hostname: minio
-    environment:
-      - GET_HOSTS_FROM=dns
-    volumes:
-      - minio-data:/data
-    ports:
-      - "9000:9000"
-    environment:
-      MINIO_ACCESS_KEY: minio
-      MINIO_SECRET_KEY: minio123
-    command: server /data
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://minio:9000/minio/health/live"]
-      interval: 30s
-      timeout: 20s
-      retries: 3
-    ports:
-      - 9000:9000
-volumes:
-    minio-data:
