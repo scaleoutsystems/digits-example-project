@@ -1,10 +1,10 @@
 
 # A federated model alliance for classification of hand-written digits, using a simple Convolutional Neural Network (CNN)
 
-The objective of this alliance model is to illustrates how to set up an alliance and collaborate on training a basic CNN model using the classical benchmark problem of classifying hand-written digits in the MNIST dataset. 
+The objective of this example project is to illustrates how to set up a basic federated CNN model. Here, the classical benchmark problem of classifying hand-written digits in the MNIST dataset is considered. 
 
 ## 1. Instructions for alliance members
-The members of an alliance generate incremental updates to the global model upon request, by training the model on locally available data. They will also act as validators, by scoring the federated model of local training data to compute average/max/min training errors. 
+The members of an alliance contribute with incremental updates to the global model upon request, by training on locally available data. Members will also act as validators, by scoring the global federated model on their own local training data in order to compute average/max/min training errors. 
 
 ### 1.1 Integrating your local data sources (members)
 
@@ -28,7 +28,7 @@ $ docker cp mnist-in-csv/mnist_train.csv mnist_cnn_data:app/
 
 You can now delete your docker container if you like. 
 
-### 1.2 Start member trainer and validator services to join the alliance
+### 1.2 Starting member trainer and validator services to join the alliance
 
 [TODO: How do they specify the Docker volume mount?]
 
