@@ -8,7 +8,7 @@ The members of an alliance contribute with incremental updates to the global mod
 
 ### 1.1 Integrating your local data sources (members)
 
-This example assumes that the member places training examples in a CSV file "train.csv" in the folder "data" (see project/read_data.py). Download the complete MNIST dataset from https://www.kaggle.com/oddrationale/mnist-in-csv and place traing data in said folder (remember to rename it to 'train.csv') 
+This example assumes that the member places training examples in a CSV file "train.csv" in the folder "data" (see project/read_data.py). Download the complete MNIST dataset from https://www.kaggle.com/oddrationale/mnist-in-csv and place the training data in said folder (remember to rename it to 'train.csv') 
 
 ### 1.2 Starting member trainer and validator services to join the alliance
 
