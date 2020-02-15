@@ -8,34 +8,16 @@ The members of an alliance contribute with incremental updates to the global mod
 
 ### 1.1 Integrating your local data sources (members)
 
-This example assumes that the member container can read training examples from a file called "train.csv", stored on a Docker  volume. When starting the member services, you will be asked to provide the ID of this volume. 
-
-To prepare the Docker volume: 
-
-Download the complete MNIST dataset and place the folder somewhere on your host machine https://www.kaggle.com/oddrationale/mnist-in-csv 
-
-Create a docker volume called 'mnistdata'
-
-    $ docker volume create mnistdata
-
-Then launch a container (any base container will do), mounting the volume and populating it with the datafiles (use 'docker cp'). Make sure to name the training  dataset 'train.csv',and the test dataset 'test.csv'.
-
-```bash
-$ docker run -d --name mnist_cnn_data --mount source=mnistdata,target=/app nginx:latest
-
-$ docker cp mnist-in-csv/mnist_train.csv mnist_cnn_data:app/ 
-```
-
-You can now delete your docker container if you like. 
+This example assumes that the member places training examples in a CSV file "train.csv" in the folder "data" (see project/read_data.py). Download the complete MNIST dataset from https://www.kaggle.com/oddrationale/mnist-in-csv and place traing data in said folder (remember to rename it to 'train.csv') 
 
 ### 1.2 Starting member trainer and validator services to join the alliance
 
-[TODO: How do they specify the Docker volume mount?]
+[TODO: How do they join the alliance.]
 
 Download the Docker-compose file "member.yaml", then:
 
      $ docker-compose up -f member.yaml 
      
     
-# 3. Instuctions for Alliance Admins 
+## 2. Instuctions for Alliance Admins 
 TODO [Should maybe be elsewhere?]
