@@ -1,7 +1,7 @@
 import sys
 import keras
 from read_data import read_training_data
-from scaleout.runtime.runtimeclient import RuntimeClient
+from scaleout.alliance.runtime.runtimeclient import RuntimeClient
 
 
 def validate(model_id=None):
