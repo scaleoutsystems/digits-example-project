@@ -12,16 +12,6 @@ from read_data import read_training_data
 
 def train(model):
     print("-- RUNNING TRAINING --")
-    """ Respond to a training request:
-        Download the global model and train on the new local data. """
-        
-    # TODO - move the communication to the MemberRunTimeClient ??
-    #client = RuntimeClient()
-
-    # Fetch global model for project
-   # print("inited client")
-   # global_model_candidate = client.get_global_model()
-   # print("got the global model")
 
     batch_size = 32
     num_classes = 10
@@ -39,9 +29,6 @@ def train(model):
 
     model.fit(x_train, y_train, batch_size=batch_size, epochs=epochs, verbose=1)
 
-    # Submit the candidate model
-    #client.send_model(global_model_candidate)
-
     print("-- TRAINING COMPLETED --")
     return model
 
@@ -52,5 +39,5 @@ if __name__ == '__main__':
         model = pickle.loads(fh.read())
     model = train(model)
     with open(sys.argv[2],"wb") as fh:
-        model = fh.write(pickle.dumps(model))
+        fh.write(pickle.dumps(model))
 
