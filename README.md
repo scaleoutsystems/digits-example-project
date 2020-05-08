@@ -11,5 +11,5 @@ The objective of this example project is to illustrates how to work in STACKn to
 
 ## 4. Deploying the model
 
-## 5. Publishing the model as to the public model portal  
+## 5. Publishing the model to the public model portal  
 
