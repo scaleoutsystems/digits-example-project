@@ -1,7 +1,7 @@
 
 # Classification of hand-written digits using a simple Convolutional Neural Network (CNN)
 
-The objective of this example project is to illustrates how to work in SRACKn to develop and deploy a basic model. The classical benchmark problem of classifying hand-written digits in the MNIST dataset is used as a demonstrator. 
+The objective of this example project is to illustrates how to work in STACKn to develop and deploy a basic model. The classical benchmark problem of classifying hand-written digits in the MNIST dataset is used as a demonstrator. 
 
 ## 1. Uploading training and test data
 
@@ -11,5 +11,5 @@ The objective of this example project is to illustrates how to work in SRACKn to
 
 ## 4. Deploying the model
 
-## 5. Publishing the model as to the public model portal  
+## 5. Publishing the model to the public model portal  
 
