@@ -6,7 +6,7 @@ import pickle
 tf.logging.set_verbosity(tf.logging.ERROR)
 tf.compat.v1.logging.set_verbosity(tf.compat.v1.logging.ERROR)
 
-from read_data import read_training_data
+from .read_data import read_training_data
 #from scaleout.alliance.runtime.runtimeclient import RuntimeClient
 
 
@@ -21,7 +21,7 @@ def train(model):
     img_rows, img_cols = 28, 28
 
     # The data, split between train and test sets
-    (x_train, y_train, classes) = read_training_data(sample_fraction=0.01)
+    (x_train, y_train, classes) = read_training_data("../dataset/train.csv",sample_fraction=0.01)
     x_train = x_train.reshape(x_train.shape[0], img_rows, img_cols, 1)
     x_train = x_train.astype('float32')
     x_train /= 255

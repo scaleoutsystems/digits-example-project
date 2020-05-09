@@ -3,7 +3,7 @@ import tensorflow as tf
 tf.logging.set_verbosity(tf.logging.ERROR)
 tf.compat.v1.logging.set_verbosity(tf.compat.v1.logging.ERROR)
 import keras
-from read_data import read_training_data
+from .read_data import read_training_data
 import pickle
 import json
 

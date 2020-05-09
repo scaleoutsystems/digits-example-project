@@ -5,8 +5,8 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 
 
-def load_digits_biased(remove_digits):
-    training_data = numpy.array(pd.read_csv("../data/train.csv"))
+def load_digits_biased(filename,remove_digits):
+    training_data = numpy.array(pd.read_csv(filename))
     X = training_data[:, 1::]
     y = training_data[:, 0]
 
@@ -22,8 +22,8 @@ def load_digits_biased(remove_digits):
     return {'data': X, 'target': y}
 
 
-def read_training_data(remove_digits=None, sample_fraction=1.0):
-    dataset = load_digits_biased(remove_digits)
+def read_training_data(filename, remove_digits=None, sample_fraction=1.0):
+    dataset = load_digits_biased(filename, remove_digits)
     x = dataset['data']
     y = dataset['target']
     if sample_fraction < 1.0:
@@ -32,8 +32,8 @@ def read_training_data(remove_digits=None, sample_fraction=1.0):
     return (x, y, classes)
 
 
-def read_test_data():
-    test_data = numpy.array(pd.read_csv("../data/test.csv"))
+def read_test_data(filename):
+    test_data = numpy.array(pd.read_csv(filename))
     X_validate = test_data[:, 1::]
     y_validate = test_data[:, 0]
 
