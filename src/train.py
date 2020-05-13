@@ -5,11 +5,11 @@ import tensorflow as tf
 import pickle
 tf.compat.v1.logging.set_verbosity(tf.compat.v1.logging.ERROR)
 
-from .read_data import read_training_data
+from .read_data import read_data
 #from scaleout.alliance.runtime.runtimeclient import RuntimeClient
 
 
-def train(model):
+def train(model,data,sample_fraction):
     print("-- RUNNING TRAINING --")
 
     batch_size = 32
@@ -20,12 +20,8 @@ def train(model):
     img_rows, img_cols = 28, 28
 
     # The data, split between train and test sets
-    (x_train, y_train, classes) = read_training_data("../dataset/train.csv",sample_fraction=0.01)
-    x_train = x_train.reshape(x_train.shape[0], img_rows, img_cols, 1)
-    x_train = x_train.astype('float32')
-    x_train /= 255
-    y_train = keras.utils.to_categorical(y_train, num_classes)
-
+    (x_train, y_train, classes) = read_data(data,sample_fraction=sample_fraction)
+    
     model.fit(x_train, y_train, batch_size=batch_size, epochs=epochs, verbose=1)
 
     print("-- TRAINING COMPLETED --")
@@ -39,4 +35,5 @@ if __name__ == '__main__':
     model = train(model)
     with open(sys.argv[2],"wb") as fh:
         fh.write(pickle.dumps(model))
+
 
