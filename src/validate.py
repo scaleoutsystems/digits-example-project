@@ -1,38 +1,32 @@
 import sys
 import tensorflow as tf 
-tf.logging.set_verbosity(tf.logging.ERROR)
 tf.compat.v1.logging.set_verbosity(tf.compat.v1.logging.ERROR)
 import keras
-from .read_data import read_training_data
+from .read_data import read_data
 import pickle
 import json
+from sklearn import metrics
+import numpy
 
-def validate(model):
+def validate(model,data,sample_fraction=1):
     
-    print("-- RUNNING VALIDATION! --")
-
     try:
-        x_test, y_test, classes = read_training_data(sample_fraction=0.01)
-        # Input image dimensions
-        img_rows, img_cols = 28, 28
-        num_classes = 10
-        x_test = x_test.reshape(x_test.shape[0], img_rows, img_cols, 1)
-        x_test = x_test.astype('float32')
-        x_test /= 255
-        y_test = keras.utils.to_categorical(y_test, num_classes)
+        x_test, y_test, classes = read_data(data,sample_fraction=sample_fraction)
         model_score = model.evaluate(x_test, y_test, verbose=0)
         print('Training loss:', model_score[0])
         print('Training accuracy:', model_score[1])
+        y_pred = model.predict_classes(x_test)
+        clf_report = metrics.classification_report(y_test.argmax(axis=-1),y_pred)
     except Exception as e:
-        print ("failed to run scoring {}".format(e))
-        exit(-1)
-
+        print ("failed to validate the model {}".format(e))
+        raise
+    
     report = { 
-                "training_loss": model_score[0],
-                "training_accuracy": model_score[1]
+                "classification_report": clf_report,
+                "loss": model_score[0],
+                "accuracy": model_score[1]
             }
 
-    print("-- VALIDATION COMPLETED --")
     return report
 
 if __name__ == '__main__':

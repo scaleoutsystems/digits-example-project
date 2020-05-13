@@ -1,41 +1,27 @@
-""" We simulate the situation that we have a small amount of new data coming in. 
-Every time we call read_data  it return a randomized, small fraction of the digits dataset. """
 import numpy
 import pandas as pd
 from sklearn.model_selection import train_test_split
 
+import keras
+import numpy
+def read_data(filename, sample_fraction=1.0):
+    """ Helper function to read and preprocess data for training with Keras. """
+    data = numpy.array(pd.read_csv(filename))
+    X = data[:, 1::]
+    y = data[:, 0]
 
-def load_digits_biased(filename,remove_digits):
-    training_data = numpy.array(pd.read_csv(filename))
-    X = training_data[:, 1::]
-    y = training_data[:, 0]
-
-    if remove_digits:
-        delete_rows = []
-        for digit, amount in remove_digits.items():
-            idx = numpy.where(y == digit)[0]
-            delete_rows += list(idx[0:int(len(idx) * amount)])
-
-        X = numpy.delete(X, delete_rows, 0)
-        y = numpy.delete(y, delete_rows, 0)
-
-    return {'data': X, 'target': y}
-
-
-def read_training_data(filename, remove_digits=None, sample_fraction=1.0):
-    dataset = load_digits_biased(filename, remove_digits)
-    x = dataset['data']
-    y = dataset['target']
+    # The entire dataset is 60k images, we can subsample here for quicker testing. 
     if sample_fraction < 1.0:
-        foo, x, bar, y = train_test_split(x, y, test_size=sample_fraction)
+        foo, X, bar, y = train_test_split(X, y, test_size=sample_fraction)
     classes = range(10)
-    return (x, y, classes)
 
+    # Input image dimensions
+    img_rows, img_cols = 28, 28
 
-def read_test_data(filename):
-    test_data = numpy.array(pd.read_csv(filename))
-    X_validate = test_data[:, 1::]
-    y_validate = test_data[:, 0]
+    # The data, split between train and test sets
+    X = X.reshape(X.shape[0], img_rows, img_cols, 1)
+    X = X.astype('float32')
+    X /= 255
+    y = keras.utils.to_categorical(y, len(classes))
+    return  (X, y, classes)
 
-    classes = range(10)
-    return (X_validate, y_validate, classes)
